@@ -1,0 +1,97 @@
+#include <iostream>
+using namespace std;
+class Tower{
+  int height;
+public:
+  Tower(){height=1;};
+  Tower(int a){height=a;};
+  int getHeight(){return height;}
+};
+
+int main() {
+  Tower myTower;
+  Tower seoulTower(100);
+  cout<<"높이는 "<<myTower.getHeight()<<"미터"<<endl;
+  cout<<"높이는 "<<seoulTower.getHeight()<<"미터"<<endl;
+  return 0;
+}
+______________________________________________________
+#include <string>
+#include <iostream>
+using namespace std;
+
+class Date{
+  int year, month, day;
+public:
+  Date(int a, int b, int c){year=a;month=b;day=c;}
+  Date(string a){year=stoi(a.substr(0,4));month=stoi(a.substr(5,1));day=stoi(a.substr(7,2));}
+  void show(){cout<<year<<"년"<<month<<"월"<<day<<"일"<<endl;}
+  int getYear(){return year;}
+  int getMonth(){return month;}
+  int getDay(){return day;}
+};
+
+int main() {
+  Date birth(2014, 3, 20);
+  Date independenceDay("1945/8/15");
+  independenceDay.show();
+  cout<<birth.getYear()<<','<<birth.getMonth()<<','<<birth.getDay()<<endl;
+  
+  return 0;
+}
+_______________________________________________________________
+#include <string>
+#include <iostream>
+using namespace std;
+
+class Account{
+int id, money;
+string name;
+public:
+  Account(string a, int b, int c){name=a;id=b;money=c;}
+  void deposit(int a){money=money+a;}
+  string getOwner(){return name;}
+  int inquiry(){return money;}
+  int withdraw(int a){money=money-a; return a;}
+};
+
+int main() {
+  Account a("kitae", 1, 5000);
+  a.deposit(50000);
+  cout<<a.getOwner()<<"의 잔액은 "<<a.inquiry()<<endl;
+  int money=a.withdraw(20000);
+  cout<<a.getOwner()<<"의 잔액은 "<<a.inquiry()<<endl;
+  
+  return 0;
+}
+________________________________________________________
+#include <string>
+#include <iostream>
+using namespace std;
+class CoffeeMachine{
+int coffee, water, sugar;
+public:
+  CoffeeMachine(int a, int b, int c){coffee=a; water=b; sugar=c;}
+  void drinkEspresso(){coffee--;water--;}
+  void drinkAmericano(){coffee--;water-=2;}
+  void drinkSugarCoffe(){coffee--;water-=2;sugar--;}
+  void fill(){coffee=10;water=10;sugar=10;}
+  void show(){
+    cout<<"커피 머신 상태, 커피:"<<coffee<<"\t물:"<<water<<"\t설탕"<<sugar<<endl;}
+
+};
+
+
+int main() {
+  CoffeeMachine java(5,10,3);
+  java.drinkEspresso();
+  java.show();
+  java.drinkAmericano();
+  java.show();
+  java.drinkSugarCoffe();
+  java.show();
+  java.fill();
+  java.show();
+  return 0;
+}
+_________________________
