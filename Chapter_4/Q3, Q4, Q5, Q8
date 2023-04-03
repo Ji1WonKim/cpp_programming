@@ -1,0 +1,128 @@
+4/3 오후 3시
+#include <string>
+#include <iostream>
+using namespace std;
+
+int main() {
+  cout<<"문자열 입력>>";
+  string str;
+  getline(cin, str, '\n');
+
+  int startindex=0, sum=0;
+  while(true){
+    int index=str.find('a',startindex);
+    if(index==-1)
+      break;
+    sum++;
+    startindex=index+1;
+  }
+  cout<<"문자 a는 "<<sum<<"개 있습니다.";
+    
+  return 0;
+}
+_____________________________________________
+#include <string>
+#include <iostream>
+using namespace std;
+
+class Sample{
+  int *p;
+  int size;
+public:
+  Sample(int n){
+    size=n;
+    p=new int [n];
+  }
+  void write(){
+    for(int i=0;i<this->size;i++)
+      cout<<this->p[i]<<" ";
+  }
+  void read(){
+    for(int i=0;i<this->size;i++)
+      cin>>this->p[i];
+  }
+  int big(){
+    for(int i=0; i<this->size;i++){
+      for(int j=1;j<this->size-1;j++){
+        if(this->p[j]>this->p[i]){
+          int tmp=this->p[j];
+          this->p[j]=this->p[i];
+          this->p[i]=tmp;
+        }
+          
+      }
+    }
+    return this->p[0];
+  }
+  ~Sample(){};
+};
+
+int main() {
+  Sample s(10);
+  s.read();
+  s.write();
+  cout<<endl<<"가장 큰 수는 "<<s.big()<<endl;
+  return 0;
+}
+_______________________________________________
+#include <string>
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+using namespace std;
+
+int main() {
+  while(true){
+    string str;
+    cout<<"아래에 한 줄을 입력하세요. (exit를 입력하면 종료합니다)"<<endl<<">>";
+    getline(cin, str, '\n');
+    
+    if(str=="exit")
+      break;
+
+    while(true){
+    srand((unsigned)time(0));
+    int a=rand()%str.length();
+    int n=rand()%27;
+      
+      if(isalpha(str[a])){
+        str[a]=(char)(n+97);break;} 
+    }
+
+    cout<<str<<endl;
+  }
+  return 0;
+}
+-_______________________________________________
+#include <string>
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+using namespace std;
+
+class Circle{
+  int radius;
+public:
+  Circle(){}
+  void setRadius(int radius){this->radius=radius;};
+  double getArea(){return 3.14*radius*radius;}
+};
+
+int main() {
+  int n, r,sum=0;
+  
+  cout<<"원의 개수 >> ";
+  cin>>n;
+  Circle *pcircle=new Circle[n];
+  for(int i=0;i<n;i++){
+    cout<<"원 "<<i+1<<"의 반지름 >> ";
+    cin>>r;
+    pcircle[i].setRadius(r);
+    if(pcircle[i].getArea()>100)
+      sum++;
+  }
+  
+  cout<<"면적이 100보다 큰 원은 "<<sum<<"개 입니다";
+  delete [] pcircle;
+  return 0;
+}
