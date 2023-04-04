@@ -108,7 +108,7 @@ int main() {
   
   return 0;
 }
-
+___________________________________________
 #include <string>
 #include <iostream>
 using namespace std;
@@ -147,5 +147,78 @@ int main() {
   elvisHisto.put("Elvis Presley");
   elvisHisto.print();
   
+  return 0;
+}
+_______________________________________________
+#include <string>
+#include <iostream>
+#include <ctime>
+#include <cstdlib>
+using namespace std;
+
+class Player{
+  string name;
+public:
+  Player(){}
+  void setName(){cin>>name;}
+  string getName(){return name;}
+};
+
+
+class GamblingGame{
+  Player *user=new Player[2]; //선수 2명 배열 생성
+  string buf;
+  int j=0;
+public:
+  GamblingGame(){cout<<"***** 겜블링 게임을 시작합니다. *****"<<endl;}
+  ~GamblingGame(){delete [] user; }
+
+  void setPlayer(){
+    cout<<"첫번째 선수 이름>>";
+    user[0].setName();
+    cout<<"두번째 선수 이름>>";
+    user[1].setName();
+    cin.ignore();
+  }
+  int randNum(){
+    int num[3];
+    cout<<"\t\t\t";
+    srand((unsigned)time(NULL));
+    
+    //랜덤 숫자 3개 뽑아서 배열에 저장
+    for(int i=0;i<3;i++){
+      num[i]=rand()%3;
+      cout<<num[i]<<"\t\t";}
+    
+    if(num[0]==num[1] && num[0]==num[2]){
+      return true;
+    }
+    else return false;
+  }
+  
+  void start(){
+    
+    while(true){
+        
+        cout<<user[j%2].getName()<<":<Enter>";
+        getline(cin,buf,'\n');
+
+        if(randNum()==true){
+          cout<<user[j%2].getName()<<"님 승리!!"<<endl;
+          break;
+        }
+        else
+          cout<<"아쉽군요!"<<endl;
+      
+        j++;
+    
+    }
+  }
+};
+
+int main() {
+  GamblingGame Game;
+  Game.setPlayer();
+  Game.start();
   return 0;
 }
