@@ -109,4 +109,43 @@ int main() {
   return 0;
 }
 
-7
+#include <string>
+#include <iostream>
+using namespace std;
+
+class Histogram{
+  string DefaltStr;
+  int sum=0;
+  int *count= new int[26];
+public:
+  Histogram(string str){DefaltStr=str;cout<<str<<endl;}
+  void put(string str){DefaltStr.append(str);cout<<str;}
+  void putc(char a){DefaltStr=DefaltStr+a;cout<<a;}
+  void print(){
+    for(int i=0;i<DefaltStr.length();i++){
+      DefaltStr[i]=tolower(DefaltStr[i]);
+      if(DefaltStr[i]>96 && DefaltStr[i]<123){
+        sum++;
+        count[(int)DefaltStr[i]-97]++;
+        }
+    }
+    cout<<endl<<endl<<"총 알파벳 수 "<<sum<<endl<<endl;
+
+    for(int i=0;i<26;i++){
+      cout<<(char)(i+97)<<" ("<<count[i]<<")\t: ";
+      for(int j=0;j<count[i];j++)
+        cout<<"*";
+      cout<<endl;
+    }
+  }
+};
+
+int main() {
+  Histogram elvisHisto("Wise men say, only fools rush in But I can't help, ");
+  elvisHisto.put("falling in love with you");
+  elvisHisto.putc('-');
+  elvisHisto.put("Elvis Presley");
+  elvisHisto.print();
+  
+  return 0;
+}
