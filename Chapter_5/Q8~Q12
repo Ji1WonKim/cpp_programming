@@ -1,0 +1,177 @@
+#include <cstring>
+#include <iostream>
+using namespace std;
+
+class MyIntStack{
+  int *p;
+  int size;
+  int tos;
+public:
+  MyIntStack(){tos=0;}
+  MyIntStack(int size){this->size=size; tos=0; p=new int[size];}
+  MyIntStack(const MyIntStack &s){
+    this->size = s.size;
+		this->tos = s.tos;
+		p = new int[s.size];
+		for (int i = 0;i < s.tos;i++) {
+			this->p[i] = s.p[i];
+		}}
+  ~MyIntStack(){if(p) delete [] p;}
+  bool push(int n){
+    
+    if(tos>size-1)
+      return false;
+    else{
+      p[tos++]=n;
+      return true;
+    }
+  }
+  bool pop(int &n){
+    tos--;
+    if(tos<0)  return false;
+    else{
+      n=p[tos];
+      return true;
+    }
+  }
+  
+};
+
+int main() {
+  MyIntStack a(10);
+  a.push(10);
+  a.push(20);
+  MyIntStack b=a;
+  b.push(30);
+
+  int n;
+  a.pop(n);
+  cout<<"스택 a에서 팝한 값 "<<n<<endl;
+  b.pop(n);
+  cout<<"스택 b에서 팝한 값 "<<n<<endl;
+  
+  return 0;
+}
+_________________________________________
+#include <cstring>
+#include <iostream>
+using namespace std;
+
+class Accumulator{
+  int value;
+public:
+  Accumulator(int value){this->value=value;}
+  Accumulator& add(int n){this->value=this->value+n; return *this;}
+  int get(){return value;}
+};
+int main() {
+  Accumulator acc(10);
+  acc.add(5).add(6).add(7);
+  cout<<acc.get();
+  return 0;
+}
+_________________________________
+#include <cstring>
+#include <iostream>
+using namespace std;
+
+class Buffer{
+  string text;
+public:
+  Buffer(string text){this->text=text;}
+  void add (string next){text+=next;}
+  void print(){cout<<text<<endl;}
+  
+};
+
+Buffer& append(Buffer& buf, string a){
+  buf.add(a);
+  return buf;
+}
+
+int main() {
+  Buffer buf("Hello");
+  Buffer& temp=append(buf, "Guys");
+  temp.print();
+  buf.print();
+  return 0;
+}
+_______________________________________
+#include <string>
+#include <iostream>
+using namespace std;
+
+class Book{
+  string title;
+  int price;
+public:
+  Book(string title, int price){
+    this->title=title;
+    this->price=price;}
+  void set(string title, int price){
+    this->title=title;
+    this->price=price;
+  }
+  void show(){cout<<title<<' '<<price<<"원"<<endl;}
+};
+
+int main() {
+  Book cpp("명품c++", 10000);
+  Book java=cpp;
+  java.set("명품자바", 12000);
+  cpp.show();
+  java.show();
+  return 0;
+}
+______________________________
+#include <string>
+#include <iostream>
+using namespace std;
+
+class Dept{
+  int size;
+  int* scores;
+public:
+  Dept(int size){
+    this->size=size;
+    scores=new int[size];
+  }
+  Dept(const Dept& dept){
+    this->size=dept.size;
+    this->scores=new int[dept.size];
+    for (int i = 0;i < this->size;i++)
+			scores[i] = dept.scores[i];
+  }
+  ~Dept(){if(this->scores) delete [] scores;}
+  int getSize(){return this->size;}
+
+  void read(){
+    cout<<"10개 점수 입력>> ";
+    for(int i=0;i<size;i++){
+      cin>>scores[i];
+    }
+  }
+
+  bool isOver60(int index){
+    if(this->scores[index]>60){
+      return true;
+    }
+    else return false;
+  }
+};
+
+int countPass(Dept dept){
+  int count=0;
+  for(int i=0;i<dept.getSize();i++){
+    if(dept.isOver60(i))  count++;
+  }
+  return count;
+}
+
+int main() {
+  Dept com(10);
+  com.read();
+  int n=countPass(com);
+  cout<<"60점 이상은 "<<n<<"명";
+  return 0;
+}
