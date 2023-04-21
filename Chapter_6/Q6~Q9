@@ -1,0 +1,66 @@
+#include <string>
+#include <iostream>
+#include <ctime>
+#include <cstdlib>
+using namespace std;
+
+
+class ArrayUtility2{
+public:
+  static int* concat(int s1[], int s2[], int size);
+  static int* remove(int s1[], int s2[], int size, int& retSize);
+};
+
+int main() {
+  int a[5], b[5];
+  
+  cout<<"정수를 5개 입력 배열 x에 삽입한다>>";
+  for(int i=0;i<5;i++)
+    cin>>a[i];
+  
+  cout<<"정수를 5개 입력 배열 y에 삽입한다>>";
+  for(int i=0;i<5;i++)
+    cin>>b[i];
+  cout<<"합친 배열 출력"<<endl;
+  cout<<concat(a,b,5);
+  cout<<"제거"<<endl;
+  cout<<remove();
+  
+  return 0;
+}
+
+#include <string>
+#include <iostream>
+#include <ctime>
+#include <cstdlib>
+using namespace std;
+
+class Random{
+public:
+  static void seed(){srand((unsigned)time(0));}
+
+  static int nextInt(int min=0, int max=32767){
+    cout<<"1~100 랜덤 정수 10개 출력"<<endl;
+    
+  }
+
+  static char nextAlphabet(){
+    cout<<"랜덤 알파벳 10개 출력"<<endl;
+  }
+
+  static double nextDouble(){
+    cout<<"랜덤 실수 10개 출력"<<endl;
+  }
+};
+
+int main(){
+  int a[10];
+  char b[10];
+  double c[10];
+  
+  Random::nextInt();
+  //nextAlphabet();
+  //nextDouble();
+  
+  return 0;
+}
